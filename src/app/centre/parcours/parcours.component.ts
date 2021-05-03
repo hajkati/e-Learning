@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Parcours} from '../../Controller/Model/parcours.model';
-import {ParcoursService} from '../../Controller/Service/parcours.service';
+
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ParcoursService} from '../../Controller/Service/parcours.service';
+import {Parcours} from '../../Controller/Model/parcours.model';
+import {Cours} from '../../Controller/Model/cours.model';
+import {Section} from '../../Controller/Model/section.model';
+import {Centre} from '../../Controller/Model/centre.model';
+
 @Component({
   selector: 'app-parcours',
   templateUrl: './parcours.component.html',
@@ -9,36 +14,75 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ParcoursComponent implements OnInit {
 
-
   constructor(private parcoursService: ParcoursService, private modalService: NgbModal) { }
   open(content): void {
     this.modalService.open(content);
   }
-  get parcourss(): Array<Parcours> {
+  // tslint:disable-next-line:typedef
+  public updateParcours(index: number, parcours: Parcours){
+    this.parcoursService.updateParcours(index, parcours);
+  }
+  // tslint:disable-next-line:typedef
+  public validateSaveParcours(){
+    return  this.parcoursService.validateSaveParcours();
+  }
+  // tslint:disable-next-line:typedef
+  public deleteSection(sections: Section){
+    this.parcoursService.deleteSection(sections);
+  }
+  get section(): Section {
+    return this.parcoursService.section;
+  }
+  get sectionList(): Array<Section> {
+    return this.parcoursService.sectionList;
+  }
+  public savesection(): void{
+    this.parcoursService.savesection();
+  }
+  get cours(): Cours {
+    return this.parcoursService.cours;
+  }
+  get parcoursList(): Array<Parcours> {
+    return this.parcoursService.parcoursList;
+  }
+  get centreList(): Array<Centre> {
+    return this.parcoursService.centreList;
+  }  get parcours(): Parcours {
+    return this.parcoursService.parcours;
+  }
+  get coursList(): Array<Cours> {
+    return this.parcoursService.coursList;
+  }
+  // tslint:disable-next-line:typedef
+  public deleteCours(cour: Cours){
+    this.parcoursService.deleteCours(cour);
+  }
+  public savecours(): void{
+    this.parcoursService.savecours();
+  }
 
-    return  this.parcoursService.parcourss ;
+  afficheSecList(cour: Cours): void {
+    this.parcoursService.affichelistSection(cour);
   }
-  public delete(index: number){
-    this.parcourss.splice(index, 1);
+  // tslint:disable-next-line:typedef
+  public deleteParcours(parcour: Parcours){
+    this.parcoursService.deleteParcours(parcour);
   }
-  public update(index: number, parcours: Parcours){
-    this.parcoursService.update(index, parcours);
+  // tslint:disable-next-line:typedef
+  findAllCentre() {
+    this.parcoursService.findAllCentre();
   }
-  public save(){
+  public save(): void {
     this.parcoursService.save();
   }
-  public validateSave(){
-    return  this.parcoursService.validateSave();
-  }
 
-  get parcours(): Parcours {
-
-    return this.parcoursService.parcours;}
   ngOnInit(): void {
-    this.parcoursService.findAll();
-  }
-  afficheCours(i: number): void {
-    this.parcoursService.afficheCours(i);
+    this.parcoursService.init();
   }
 
+
+  // tslint:disable-next-line:typedef
+  afficheCours(parcour: Parcours): void {
+    this.parcoursService.afficheCours(parcour);
+  }
 }

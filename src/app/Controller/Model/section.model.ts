@@ -1,4 +1,5 @@
-import { Cours } from "./cours.model";
+import { Cours } from './cours.model';
+import {CategorieSection} from './categorie-section.model';
 export class Section {
   public  id: number ;
   public ref: string;
@@ -13,7 +14,8 @@ export class Section {
   public nombreContenuFinalise: number;
   public nombreContenuEnCours: number;
   public nombreLienFinalise: number;
-  public nombreLienEnCourse: number;
-  public cours: Cours;
+  public nombreLienEnCours: number;
+  public cours = new  Cours() ;
+  public categorieSection = new  CategorieSection() ;
 }
 

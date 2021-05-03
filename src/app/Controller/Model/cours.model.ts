@@ -1,5 +1,5 @@
-import {Section} from "./section.model";
-import {Parcours} from "./parcours.model";
+import {Section} from './section.model';
+import {Parcours} from './parcours.model';
 export class Cours {
   public  id: number ;
   public ref: string;
@@ -9,8 +9,8 @@ export class Cours {
   public nombreContenuFinalise: number;
   public nombreContenuEnCours: number;
   public nombreLienFinalise: number;
-  public nombreLienEnCourse: number;
+  public nombreLienEnCours: number;
   public numeroOrder: number;
-  public parcours: Parcours ;
-  public  sections = new Array<Section>();
+  public parcours = new  Parcours() ;
+  public  sectionList = new Array<Section>();
 }

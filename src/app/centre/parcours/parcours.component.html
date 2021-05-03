@@ -1,55 +1,61 @@
-<div class="card mt-lg-5">
-  <div class="card-header">information Parcours</div>
+
+  <div class="card  mt-lg-5" >
+  <div class="card-header" style="background-color: powderblue">Liste des Parcours</div>
   <div class="card-body">
-    <table class="table table-hover table-striped">
+    <table class="table table-responsive table-hover">
       <thead>
-      <th>Libelle</th>
-      <th> description </th>
-      <th> delete </th>
-      <th>update</th>
+      <th>Nom</th>
+      <th>Action</th>
       </thead>
       <tbody>
-      <tr *ngFor="let p of parcourss; index as i">
+      <tr  *ngFor="let p of parcoursList;index as i ">
         <td>{{p.libelle}}</td>
-        <td>{{p.description}}</td>
-        <td><span (click)="delete(i)"><i class="fa fa-trash btn btn-danger"></i></span> </td>
-        <td><span (click)="update(i,p)"><i class="fa fa-edit btn btn-warning"></i></span>
-          <button class="btn  btn-sm btn-outline-primary  fa fa-eye" (click)="afficheCours(i)"></button>
-
+        <td  >
+          <button class="btn  btn-sm btn-sm btn-outline-info btn-plus fa fa-eye" (click)="afficheCours(p)"></button>
+          <button class="btn  btn-sm btn-outline-warning " (click)="open(content)" (click)="updateParcours(i,p)"><i class="fa fa-edit"></i></button>
+          <button class="btn  btn-sm btn-outline-danger btn-trash" (click)="deleteParcours(p)"><i class="fa fa-trash"></i></button>
+        </td>
       </tr>
       </tbody>
     </table>
-  </div><div class="card-footer">
-  <button class="btn  btn-outline-primary btn-block" (click)="open(content)">Ajouter un nouveau parcours</button>
-</div></div>
-
-
+  </div>
+  <div class="card-footer" style="background-color: powderblue">
+    <button class="btn  btn-outline-light btn-info btn-block" (click)="open(content)">Add parcours</button>
+  </div>
+</div>
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Ajouts Parcours</h4>
+  <div class="modal-header" style="background-color: lightcyan">
+    <h4 class="modal-title" id="modal-basic-title">ajout parcours</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" style="background-color: lightcyan">
     <div class="form">
       <div class="form-group">
-        <label>Code</label>
-        <input type="text" class="form-control" [(ngModel)]="parcours.ref">
+        <label class="primaryLab"> centre </label>
+        <select type="text" class="btn btn-block btn-outline-light form-control"  style="background-color: lightblue" name="Parcours" (click)="findAllCentre()" [(ngModel)]="parcours.centre.ref" >
+          <option  selected="selected" *ngFor="let c of centreList"  [ngValue]="c.ref"> {{c.libelle}}</option>
+        </select>
       </div>
       <div class="form-group">
-        <label>libelle</label>
-        <input type="text" class="form-control" [(ngModel)]="parcours.libelle">
+        <label>Reference</label>
+        <input type="text" class="form-control text-center" placeholder="Reference" [(ngModel)]="parcours.ref">
       </div>
       <div class="form-group">
-        <label>duree</label>
-        <input type="number" class="form-control" [(ngModel)]="parcours.description">
+        <label>Libelle</label>
+        <input type="text" class="form-control text-center" placeholder="Libelle" [(ngModel)]="parcours.libelle">
       </div>
+      <div class="form-group">
+        <label>description</label>
+        <input type="text" class="form-control text-center" placeholder="Description" [(ngModel)]="parcours.description">
+      </div>
+
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-primary" (click)="save()" [disabled] !="validateSave()" >Save</button>
+  <div class="modal-footer" style="background-color: lightcyan">
+    <button type="button" class="btn btn-outline-light btn-dark" (click)="save()"  >Save</button>
     <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">close</button>
   </div>
 </ng-template>
